@@ -10,7 +10,7 @@ In this project i used *ATMEGA8* as a Microcontroller and *L293D driver* for a *
 - Half-step
 - Microstep
 
-## Micro-step-calculation:
+## Micro step Calculation:
 Microstep functions declared in this project are: 
 ```
 void u16Step(int cnt, char forwards);
@@ -20,5 +20,5 @@ void u48Step(int cnt, char forwards);
 void u64Step(int cnt, char forwards);
 void u96Step(int cnt, char forwards);
 ```
-:information_source: ***I assumed Step Angle of the stepper motor is 90 degree(step angle of Stepper Motor in simulation is 90 degree)***.<br>
-so `u16Step` means that it takes **16 steps** for a motor with 90 degree step angle to complete **one revolution**.(obviously it takes 4 steps for 90 degrees) and similarly we can calculate steps per revolution for other functions and for other motors with different step angle.
+:information_source: **I Assumed Step Angle of the stepper motor is 90 degree (step angle of Stepper Motor in simulation is 90 degree)**.<br>
+so `u16Step` means that it takes **16 steps** for a motor with 90 degree step angle to complete **one revolution** (obviously it takes 4 steps for 90 degrees) and similarly we can calculate steps per revolution for other functions and for other motors with different step angles.
