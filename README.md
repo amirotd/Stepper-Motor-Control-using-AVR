@@ -1,6 +1,6 @@
 # Stepper-Motor-Control-using-AVR
 This is an *AVR* based project that is written in **codevisionAVR** environment and simulated in **proteus**.<br>
-perpose of this project is to control Speed, Direction of Rotation and Selecting a specific Mode for Stepper Motors.<br>
+purpose of this project is to control Speed, Direction of Rotation and Selecting a specific Mode for Stepper Motors.<br>
 
 ## Hardware and tools:
 In this project i used *ATMEGA8* as a Microcontroller and *L293D driver* for a *Bipolar(4-Wire) Stepper Motor*.<br>
