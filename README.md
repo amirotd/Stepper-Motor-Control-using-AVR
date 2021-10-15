@@ -5,7 +5,7 @@ purpose of this project is to control Speed, Direction of Rotation and Selecting
 ## Hardware and tools:
 In this project i used *ATMEGA8* as a Microcontroller and *L293D driver* for a *Bipolar(4-Wire) Stepper Motor*.<br>
 
-## Three supported Modes of operation for Stepper Motors in this project:
+### Three supported Modes of operation for Stepper Motors in this project:
 - Full-step 
 - Half-step
 - Microstep
@@ -20,5 +20,5 @@ void u48Step(int cnt, char forwards);
 void u64Step(int cnt, char forwards);
 void u96Step(int cnt, char forwards);
 ```
-:information_source: **I Assumed Step Angle of the stepper motor is 90 degree (step angle of Stepper Motor in simulation is 90 degree)**.<br>
+:information_source: **I Assumed that Step angle of the stepper motor is 90 degree (step angle of Stepper Motor in simulation is 90 degree)**.<br>
 so `u16Step` means that it takes **16 steps** for a motor with 90 degree step angle to complete **one revolution** (obviously it takes 4 steps for 90 degrees) and similarly we can calculate steps per revolution for other functions and for other motors with different step angles.
