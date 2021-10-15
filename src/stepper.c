@@ -21,9 +21,6 @@ void u96Step(int cnt, char forwards);
 void main(void)
 {
 
-PORTB=0x01;
-DDRB=0x01;
-
 PORTC=0x00;
 DDRC=0x0F;
 
