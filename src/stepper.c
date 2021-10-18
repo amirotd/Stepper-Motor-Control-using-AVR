@@ -1,5 +1,6 @@
 #include <mega8.h>
 #include <delay.h>
+#include <alcd.h>
 
 long duty = 50;
 int waitMicroSeconds = 5000;
@@ -20,24 +21,31 @@ void u96Step(int cnt, char forwards);
 
 void main(void)
 {
+PORTB=0x00;
+DDRB=0x00;
 
 PORTC=0x00;
 DDRC=0x0F;
 
+lcd_init(16);
 setSpeed(5000,50);
 
 while (1)
       {
-       fullStep(1,'R');
-       halfStep(1,'R');
-       u16Step(1,'L');
-       u24Step(1,'R');
-       u32Step(1,'R');
-       u48Step(1,'R');
-       u64Step(1,'R');
-       u96Step(1,'R');
-       motorOff(); 
-       delay_ms(6);
+      lcd_clear();
+      lcd_gotoxy(0, 0);
+      lcd_puts("Stepper Motor Control");
+      
+      fullStep(1,'R');
+      halfStep(1,'R');
+      u16Step(1,'L');
+      u24Step(1,'R');
+      u32Step(1,'R');
+      u48Step(1,'R');
+      u64Step(1,'R');
+      u96Step(1,'R');
+      motorOff(); 
+      delay_ms(6);
       }
 }
 
