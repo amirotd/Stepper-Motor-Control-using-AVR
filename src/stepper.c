@@ -1,11 +1,12 @@
 #include <mega8.h>
 #include <delay.h>
 #include <alcd.h>
+#include <stdio.h>
 
 long duty = 50;
 int waitMicroSeconds = 5000;
 int pulseCount = 50;
-
+char rotation = 'R';
 
 void setSpeed(int wms , int pc);
 void doStep(int st);
@@ -34,16 +35,25 @@ while (1)
       {
       lcd_clear();
       lcd_gotoxy(0, 0);
-      lcd_puts("Stepper Motor Control");
-      
-      fullStep(1,'R');
-      halfStep(1,'R');
-      u16Step(1,'L');
-      u24Step(1,'R');
-      u32Step(1,'R');
-      u48Step(1,'R');
-      u64Step(1,'R');
-      u96Step(1,'R');
+      lcd_puts(" Stepper-Motor");
+      lcd_gotoxy(0, 1);
+      lcd_puts("Rotation: ");
+      switch (rotation)
+       {
+        case 'R':
+            lcd_puts("Right");break;
+        case 'L':
+            lcd_puts("Left");break;
+       }       
+
+      fullStep(1,rotation);
+      halfStep(1,rotation);
+      u16Step(1,rotation);
+      u24Step(1,rotation);
+      u32Step(1,rotation);
+      u48Step(1,rotation);
+      u64Step(1,rotation);
+      u96Step(1,rotation);
       motorOff(); 
       delay_ms(6);
       }
