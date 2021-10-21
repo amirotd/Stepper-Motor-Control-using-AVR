@@ -28,6 +28,9 @@ DDRB=0x00;
 PORTC=0x00;
 DDRC=0x0F;
 
+PORTD=0x00;
+PORTD=0x00;
+
 lcd_init(16);
 setSpeed(5000,50);
 
@@ -36,6 +39,17 @@ while (1)
       lcd_clear();
       lcd_gotoxy(0, 0);
       lcd_puts(" Stepper-Motor");
+      
+      if (PIND.0 == 0x01)
+      {
+       switch (rotation)
+       {
+        case 'R':
+            rotation = 'L';break;
+        case 'L':
+            rotation = 'R';break;
+       }
+      }
       lcd_gotoxy(0, 1);
       lcd_puts("Rotation: ");
       switch (rotation)
@@ -44,16 +58,16 @@ while (1)
             lcd_puts("Right");break;
         case 'L':
             lcd_puts("Left");break;
-       }       
+       }             
 
       fullStep(1,rotation);
-      halfStep(1,rotation);
-      u16Step(1,rotation);
-      u24Step(1,rotation);
-      u32Step(1,rotation);
-      u48Step(1,rotation);
-      u64Step(1,rotation);
-      u96Step(1,rotation);
+//      halfStep(1,rotation);
+//      u16Step(1,rotation);
+//      u24Step(1,rotation);
+//      u32Step(1,rotation);
+//      u48Step(1,rotation);
+//      u64Step(1,rotation);
+//      u96Step(1,rotation);
       motorOff(); 
       delay_ms(6);
       }
