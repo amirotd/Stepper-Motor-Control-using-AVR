@@ -2,11 +2,14 @@
 #include <delay.h>
 #include <alcd.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 long duty = 50;
 int waitMicroSeconds = 5000;
 int pulseCount = 50;
 char rotation = 'R';
+int val = 50;
+char temp[5] = "50";
 
 void setSpeed(int wms , int pc);
 void doStep(int st);
@@ -20,6 +23,26 @@ void u48Step(int cnt, char forwards);
 void u64Step(int cnt, char forwards);
 void u96Step(int cnt, char forwards);
 
+interrupt [EXT_INT0] void ext_int0_isr(void)
+{
+ motorOff();
+ val += 5;
+ itoa(val, temp);
+ lcd_gotoxy(0, 2);
+ lcd_puts("Speed PC: ");
+ lcd_puts(temp);
+}
+
+interrupt [EXT_INT1] void ext_int1_isr(void)
+{
+ motorOff();
+ val -= 5;
+ itoa(val, temp);
+ lcd_gotoxy(0, 2);
+ lcd_puts("Speed PC: ");
+ lcd_puts(temp);
+}
+
 void main(void)
 {
 PORTB=0x00;
@@ -31,11 +54,17 @@ DDRC=0x0F;
 PORTD=0x00;
 PORTD=0x00;
 
+GICR|=0xC0;
+MCUCR=0x0F;
+GIFR=0xC0;
+
+#asm("sei")
+
 lcd_init(16);
-setSpeed(5000,50);
 
 while (1)
       {
+      setSpeed(5000, val);
       lcd_clear();
       lcd_gotoxy(0, 0);
       lcd_puts(" Stepper-Motor");
@@ -58,18 +87,21 @@ while (1)
             lcd_puts("Right");break;
         case 'L':
             lcd_puts("Left");break;
-       }             
-
-      fullStep(1,rotation);
+       }
+      lcd_gotoxy(0, 2);
+      lcd_puts("Speed PC: ");
+      lcd_puts(temp);
+              
+//      fullStep(1,rotation);
 //      halfStep(1,rotation);
-//      u16Step(1,rotation);
+      u16Step(1,rotation);
 //      u24Step(1,rotation);
 //      u32Step(1,rotation);
 //      u48Step(1,rotation);
 //      u64Step(1,rotation);
 //      u96Step(1,rotation);
-      motorOff(); 
-      delay_ms(6);
+//      motorOff(); 
+//      delay_ms(6);
       }
 }
 
