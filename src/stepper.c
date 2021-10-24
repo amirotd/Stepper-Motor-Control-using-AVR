@@ -3,6 +3,7 @@
 #include <alcd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 long duty = 50;
 int waitMicroSeconds = 5000;
@@ -10,6 +11,7 @@ int pulseCount = 50;
 char rotation = 'R';
 int val = 50;
 char temp[5] = "50";
+char mode[20] = "";
 
 void setSpeed(int wms , int pc);
 void doStep(int st);
@@ -68,7 +70,7 @@ while (1)
       lcd_clear();
       lcd_gotoxy(0, 0);
       lcd_puts(" Stepper-Motor");
-      
+
       if (PIND.0 == 0x01)
       {
        switch (rotation)
@@ -91,10 +93,14 @@ while (1)
       lcd_gotoxy(0, 2);
       lcd_puts("Speed PC: ");
       lcd_puts(temp);
+
+      lcd_gotoxy(0, 3);
+      lcd_puts("Mode: ");
+      lcd_puts(mode);
               
 //      fullStep(1,rotation);
-//      halfStep(1,rotation);
-      u16Step(1,rotation);
+      halfStep(1,rotation);
+//      u16Step(1,rotation);
 //      u24Step(1,rotation);
 //      u32Step(1,rotation);
 //      u48Step(1,rotation);
@@ -133,7 +139,7 @@ void doStep(int st){
     case 31: PORTC=0x01;break;
     case 32: PORTC=0x08;break;
     case 33: PORTC=0x02;break;
-    case 34: PORTC=0x04;break;;
+    case 34: PORTC=0x04;break;
     }
 
     delay_ms(dt1);
@@ -168,6 +174,9 @@ void motorOff(void){
 
 void fullStep(int cnt, char forwards){
   int i=0;
+  strcpy(mode, "Full Step");
+  lcd_gotoxy(6, 3);
+  lcd_puts(mode);
   for (i = 0; i < cnt; i++){
     duty = 50;
     if (forwards == 'R')
@@ -190,6 +199,9 @@ void fullStep(int cnt, char forwards){
 void halfStep(int cnt, char forwards){
   const int list[] = {1,11,2,12,3,13,4,14};
   int i=0;
+  strcpy(mode, "Half Step");
+  lcd_gotoxy(6, 3);
+  lcd_puts(mode);
   for (i = 0; i < cnt; i++){
     duty = 50;
     if (forwards == 'R')
@@ -213,6 +225,9 @@ void u16Step(int cnt, char forwards){
 
   const int list[] = {1,21,11,31,2,22,12,32,3,23,13,33,4,24,14,34};
   int i=0;
+  strcpy(mode, "u16Step  ");
+  lcd_gotoxy(6, 3);
+  lcd_puts(mode);
   for (i = 0; i < cnt; i++){
     duty = 50;
     if (forwards == 'R')
@@ -235,7 +250,10 @@ void u16Step(int cnt, char forwards){
 void u24Step(int cnt, char forwards){
   const int list1[] = {1,11,2,12,3,13,4,14};
   const int list2[] = {21,31,22,32,23,33,24,34};
-   int i=0;
+  int i=0;
+  strcpy(mode, "u24Step  ");
+  lcd_gotoxy(6, 3);
+  lcd_puts(mode);
   for (i = 0; i < cnt; i++){
 
     duty = 50;
@@ -275,7 +293,10 @@ void u24Step(int cnt, char forwards){
 void u32Step(int cnt, char forwards){
   const int list1[] = {1,11,2,12,3,13,4,14};
   const int list2[] = {21,31,22,32,23,33,24,34};
-   int i=0;
+  int i=0;
+  strcpy(mode, "u32Step  ");
+  lcd_gotoxy(6, 3);
+  lcd_puts(mode);
   for (i = 0; i < cnt; i++){
 
     duty = 50;
@@ -321,6 +342,9 @@ void u48Step(int cnt, char forwards){
   const int list1[] = {1,11,2,12,3,13,4,14};
   const int list2[] = {21,31,22,32,23,33,24,34};
   long i=0;
+  strcpy(mode, "u48Step  ");
+  lcd_gotoxy(6, 3);
+  lcd_puts(mode);
   for (i = 0; i < cnt; i++){
 
     duty = 50;
@@ -358,6 +382,9 @@ void u64Step(int cnt, char forwards){
   const int list1[] = {1,11,2,12,3,13,4,14};
   const int list2[] = {21,31,22,32,23,33,24,34};
   long i=0;
+  strcpy(mode, "u64Step  ");
+  lcd_gotoxy(6, 3);
+  lcd_puts(mode);
   for (i = 0; i < cnt; i++){
 
     duty = 50;
@@ -395,6 +422,9 @@ void u96Step(int cnt, char forwards){
   const int list1[] = {1,11,2,12,3,13,4,14};
   const int list2[] = {21,31,22,32,23,33,24,34};
   long i=0;
+  strcpy(mode, "u96Step  ");
+  lcd_gotoxy(6, 3);
+  lcd_puts(mode);
   //int i=0;
   for (i = 0; i < cnt; i++){
 
