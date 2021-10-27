@@ -3,7 +3,7 @@ This is an *AVR* based project that is written in **codevisionAVR** environment 
 purpose of this project is to control Speed, Direction of Rotation and Selecting a specific Mode for Stepper Motors.<br>
 
 ## Hardware and tools:
-In this project i used *ATMEGA8* as a Microcontroller and *L293D driver* for a *Bipolar(4-Wire) Stepper Motor*.<br>
+In this project i used *ATMEGA8* as a Microcontroller and *L293D driver* for a *Bipolar(4-Wire) Stepper Motor* and *4x16 alphanumeric LCD* to display Mode, Direction of Rotation and Speed.<br>
 
 ### Three supported Modes of operation for Stepper Motors in this project:
 - Full-step 
